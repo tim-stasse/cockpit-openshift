@@ -24,27 +24,24 @@ import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/compo
 
 const _ = cockpit.gettext;
 
-export class Application extends React.Component {
-    constructor() {
-        super();
-        this.state = { hostname: _("Unknown") };
+export const Application = () => {
+    const [hostname, setHostname] = React.useState(_("Unknown"));
 
+    React.useEffect(() => {
         cockpit.file('/etc/hostname').watch(content => {
-            this.setState({ hostname: content.trim() });
+            setHostname(content.trim());
         });
-    }
+    }, []);
 
-    render() {
-        return (
-            <Card>
-                <CardTitle>Starter Kit</CardTitle>
-                <CardBody>
-                    <Alert
-                        variant="info"
-                        title={ cockpit.format(_("Running on $0"), this.state.hostname) }
-                    />
-                </CardBody>
-            </Card>
-        );
-    }
-}
+    return (
+        <Card>
+            <CardTitle>OpenShift</CardTitle>
+            <CardBody>
+                <Alert
+                    variant="info"
+                    title={ cockpit.format(_("Running on $0"), hostname) }
+                />
+            </CardBody>
+        </Card>
+    );
+};
