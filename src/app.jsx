@@ -57,7 +57,7 @@ export const Application = () => {
             }
 
             setDeployState(DEPLOY_STATES.DEPLOYING);
-            cockpit.spawn(["ping", "-c", "4", "8.8.8.8"])
+            cockpit.spawn(["deploy-openshift-all-nodes"])
                     .stream((data) => setOutput((output) => output + data))
                     .then(() => setDeployState(DEPLOY_STATES.DEPLOYED))
                     .catch(() => setDeployState(DEPLOY_STATES.FAILED));
