@@ -23,7 +23,7 @@ import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js
 import { Button } from "@patternfly/react-core/dist/esm/components/Button/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
 import { Stack, StackItem } from "@patternfly/react-core/dist/esm/layouts/Stack/index.js";
-import { LogViewer } from "@patternfly/react-log-viewer/dist/esm/LogViewer/index.js";
+import { LogView } from "./components/log-view";
 
 const _ = cockpit.gettext;
 
@@ -100,7 +100,7 @@ export const Application = () => {
                         output.length > 0
                             ? (
                                 <StackItem>
-                                    <LogViewer hasLineNumbers={false} height={300} data={output} />
+                                    <LogView data={output} />
                                 </StackItem>
                             )
                             : null
