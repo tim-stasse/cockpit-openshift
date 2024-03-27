@@ -34,7 +34,7 @@ const DEPLOY_STATES = {
     FAILED: "failed"
 };
 
-const ALERT_DEPLY_STATE_MAP = {
+const ALERT_DEPLOY_STATE_MAP = {
     [DEPLOY_STATES.DEPLOYED]: "success",
     [DEPLOY_STATES.FAILED]: "danger",
 };
@@ -90,7 +90,7 @@ export const Application = () => {
                             : (
                                 <StackItem>
                                     <Alert
-                                        variant={ALERT_DEPLY_STATE_MAP[deployState] ?? "info"}
+                                        variant={ALERT_DEPLOY_STATE_MAP[deployState] ?? "info"}
                                         title={ cockpit.format(_("Running on $0"), hostname) }
                                     />
                                 </StackItem>
