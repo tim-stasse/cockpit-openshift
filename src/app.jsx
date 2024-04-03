@@ -23,7 +23,9 @@ import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js
 import { Button } from "@patternfly/react-core/dist/esm/components/Button/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
 import { Stack, StackItem } from "@patternfly/react-core/dist/esm/layouts/Stack/index.js";
+import { stringify } from "logfmt/lib/stringify";
 import { LogView } from "./components/log-view";
+import { logMessage } from "./utils/logrus";
 
 const _ = cockpit.gettext;
 
@@ -58,7 +60,10 @@ export const Application = () => {
 
             setDeployState(DEPLOY_STATES.DEPLOYING);
             cockpit.spawn(["ping", "-c", "4", "8.8.8.8"])
-                    .stream((data) => setOutput((output) => output + data))
+                    .stream((data) => {
+                        const structuredLog = stringify({ level: "info", msg: data.trimEnd() });
+                        setOutput((output) => output + logMessage(structuredLog) + "\n");
+                    })
                     .then(() => setDeployState(DEPLOY_STATES.DEPLOYED))
                     .catch(() => setDeployState(DEPLOY_STATES.FAILED));
         },

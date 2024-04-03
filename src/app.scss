@@ -3,3 +3,47 @@
 p {
     font-weight: bold;
 }
+
+@mixin ansi-color($colorName, $colorValue) {
+    .ansi-#{$colorName} {
+        &-fg {
+            color: $colorValue;
+        }
+
+        &-bg {
+            background-color: $colorValue;
+        }
+    }
+}
+
+@include ansi-color("black",   rgb(  0,   0,   0));
+@include ansi-color("red",     rgb(187,   0,   0));
+@include ansi-color("green",   rgb(  0, 187,   0));
+@include ansi-color("yellow",  rgb(187, 187,   0));
+@include ansi-color("blue",    rgb(  0,   0, 187));
+@include ansi-color("magenta", rgb(187,   0, 187));
+@include ansi-color("cyan",    rgb(  0, 187, 187));
+@include ansi-color("white",   rgb(255, 255, 255));
+
+@include ansi-color("bright-black",   rgb( 85,  85,  85));
+@include ansi-color("bright-red",     rgb(255,  85,  85));
+@include ansi-color("bright-green",   rgb(  0, 255,   0));
+@include ansi-color("bright-yellow",  rgb(255, 255,  85));
+@include ansi-color("bright-blue",    rgb( 85,  85, 255));
+@include ansi-color("bright-magenta", rgb(255,  85, 255));
+@include ansi-color("bright-cyan",    rgb( 85, 255, 255));
+@include ansi-color("bright-white",   rgb(255, 255, 255));
+
+.ansi {
+    &-bold {
+        font-weight: bold;
+    }
+
+    &-italic {
+        font-style: italic;
+    }
+
+    &-underline {
+        text-decoration: underline;
+    }
+}

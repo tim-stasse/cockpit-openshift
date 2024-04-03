@@ -38,6 +38,7 @@ export const LogView = ({ data, ...props }) => {
                     ? null
                     : <Button onClick={onClick}>Jump to the bottom</Button>
             }
+            useAnsiClasses
         />
     );
 };
